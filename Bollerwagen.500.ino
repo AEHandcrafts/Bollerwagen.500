@@ -4,7 +4,7 @@
 #include "programexecutor.h"
 
 Adafruit_NeoPixel physical_strip(10, 5, NEO_GRB + NEO_KHZ800);
-ProgramExecutor executor;
+ProgramExecutor executor(&physical_strip);
 
 // TODO: create virtual sub-strips
 VirtualStrip str1(&physical_strip, 0, 5);

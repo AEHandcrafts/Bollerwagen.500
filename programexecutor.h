@@ -7,13 +7,14 @@
 class ProgramExecutor {
 
 private:
+  Adafruit_NeoPixel* physical_strip;
   std::vector<Program*> programs;
   
   int selected;
   unsigned long frame;
   
 public:
-  ProgramExecutor();
+  ProgramExecutor(Adafruit_NeoPixel* physical_strip);
 
   void registerProgram(Program* program);
   void nextProgram();
