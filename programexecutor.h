@@ -1,20 +1,19 @@
 #ifndef PROGRAMEXECUTOR_H
 #define PROGRAMEXECUTOR_H
 
-#include "Program.h"
+#include "program.h"
+#include <ArduinoSTL.h>
 
 class ProgramExecutor {
 
 private:
-  Program** programs;
-  int count_programs;
+  std::vector<Program*> programs;
   
   int selected;
   unsigned long frame;
   
 public:
-  ProgramExecutor(int count);
-  ~ProgramExecutor();
+  ProgramExecutor();
 
   void registerProgram(Program* program);
   void nextProgram();

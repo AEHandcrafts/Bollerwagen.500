@@ -1,19 +1,14 @@
-#include "ProgramExecutor.h"
+#include "programexecutor.h"
 
-ProgramExecutor::ProgramExecutor(int count): selected(0), frame(0), count_programs(0), programs(new Program*[count]){
-}
-
-ProgramExecutor::~ProgramExecutor(){
-  delete[] this->programs;
+ProgramExecutor::ProgramExecutor(): selected(0), frame(0){
 }
 
 void ProgramExecutor::registerProgram(Program* program){
-  this->programs[this->count_programs] = program;
-  this->count_programs++;
+  this->programs.push_back(program);
 }
 
 void ProgramExecutor::nextProgram(){
-  this->selected = (this->selected + 1) % this->count_programs;
+  this->selected = (this->selected + 1) % this->programs.size();
   this->frame = 0;
 }
 

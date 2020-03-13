@@ -1,25 +1,23 @@
 #include <Adafruit_NeoPixel.h>
-#include "Strip.h"
-#include "Program.h"
+#include "virtualstrip.h"
+#include "program.h"
 #include "programexecutor.h"
 
-Adafruit_NeoPixel strip(10, 5, NEO_GRB + NEO_KHZ800);
+Adafruit_NeoPixel physical_strip(10, 5, NEO_GRB + NEO_KHZ800);
+ProgramExecutor executor;
 
 // TODO: create virtual sub-strips
-Strip str1(&strip, 0, 5);
-Strip str2(&strip, 6, 10);
-
-// Parameter count wichtig!!!! -> dynamisches Array!
-ProgramExecutor executor(1);
+VirtualStrip str1(&physical_strip, 0, 5);
+VirtualStrip str2(&physical_strip, 6, 10);
 
 void setup() {
   // Setup Button
-  attachInterrupt(0, onButtonClick, RISING);
+  attachInterrupt(digitalPinToInterrupt(2), onButtonClick, RISING);
    
   // Physical Strip init 
-  strip.begin();
-  strip.clear();
-  strip.show();
+  physical_strip.begin();
+  physical_strip.clear();
+  physical_strip.show();
 
   // Programs init
   // executor.registerProgram(new StaticColorProgram());
@@ -28,7 +26,7 @@ void setup() {
 void loop() {
   // TODO: Voltmeter
   executor.render();
-  strip.show();
+  physical_strip.show();
 }
 
 void onButtonClick(){

@@ -1,7 +1,7 @@
 #ifndef PROGRAM_H
 #define PROGRAM_H
 
-#include "strip.h"
+#include "virtualstrip.h"
 
 class Program {
   
@@ -9,7 +9,7 @@ protected:
   //TODO: define strips!! Strip* strip;
 
 public:
-  Program(Strip* strip);
+  Program(VirtualStrip* strip);
   virtual ~Program(){};
 
   virtual void render(unsigned long frame) = 0;
