@@ -14,7 +14,7 @@ void setup() {
   // Setup Button
   attachInterrupt(digitalPinToInterrupt(2), onButtonClick, RISING);
    
-  // Physical Strip init 
+  // Physical Strip init
   physical_strip.begin();
   physical_strip.clear();
   physical_strip.show();
