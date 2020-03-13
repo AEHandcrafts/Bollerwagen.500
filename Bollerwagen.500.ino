@@ -3,6 +3,8 @@
 #include "program.h"
 #include "programexecutor.h"
 
+#include "programs/noprogram.h"
+
 Adafruit_NeoPixel physical_strip(10, 5, NEO_GRB + NEO_KHZ800);
 ProgramExecutor executor(&physical_strip);
 
@@ -20,13 +22,12 @@ void setup() {
   physical_strip.show();
 
   // Programs init
-  // executor.registerProgram(new StaticColorProgram());
+  executor.registerProgram(new NoProgram());
 }
 
 void loop() {
   // TODO: Voltmeter
   executor.render();
-  physical_strip.show();
 }
 
 void onButtonClick(){

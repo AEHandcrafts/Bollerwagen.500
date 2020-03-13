@@ -9,8 +9,9 @@ protected:
   //TODO: define strips!! Strip* strip;
 
 public:
-  Program(VirtualStrip* strip);
-  virtual ~Program(){};
+  Program(){}
+  Program(VirtualStrip* strip){}
+  virtual ~Program(){}
 
   virtual void render(unsigned long frame) = 0;
   

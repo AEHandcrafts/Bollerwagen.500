@@ -17,4 +17,5 @@ void ProgramExecutor::nextProgram(){
 
 void ProgramExecutor::render(){
   this->programs[this->selected]->render(this->frame);
+  this->physical_strip->show();
 }
