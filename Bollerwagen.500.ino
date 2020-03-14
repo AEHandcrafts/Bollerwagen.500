@@ -13,23 +13,29 @@ VirtualStrip str1(&physical_strip, 0, 5);
 VirtualStrip str2(&physical_strip, 6, 10);
 
 void setup() {
+  Serial.begin(9600);
+  
   // Setup Button
   attachInterrupt(digitalPinToInterrupt(2), onButtonClick, RISING);
+  Serial.println("Attatched Button Interrupt.");
    
   // Physical Strip init
   physical_strip.begin();
   physical_strip.clear();
   physical_strip.show();
+  Serial.println("Initialized Physical LED Strip.");
 
-  // Programs init
+  // Register Programs
   executor.registerProgram(new NoProgram());
+  Serial.println("Registered Programs.");
 }
 
 void loop() {
-  // TODO: Voltmeter
   executor.render();
+  // TODO: Add Voltmeter
 }
 
 void onButtonClick(){
+  Serial.println("Received Button Interrupt.");
   executor.nextProgram();
 }

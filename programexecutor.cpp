@@ -10,9 +10,11 @@ void ProgramExecutor::registerProgram(Program* program){
 void ProgramExecutor::nextProgram(){
   this->physical_strip->clear();
   this->physical_strip->show();
+  Serial.println("Cleared the LED Strip.");
   
   this->selected = (this->selected + 1) % this->programs.size();
   this->frame = 0;
+  Serial.println("Switched the Program to " + this->selected);
 }
 
 void ProgramExecutor::render(){
