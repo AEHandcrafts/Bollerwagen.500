@@ -14,10 +14,11 @@ void ProgramExecutor::nextProgram(){
   
   this->selected = (this->selected + 1) % this->programs.size();
   this->frame = 0;
-  Serial.println("Switched the Program to " + this->selected);
+  Serial.println("Switched the Program to " + String(this->selected));
 }
 
 void ProgramExecutor::render(){
   this->programs[this->selected]->render(this->frame);
   this->physical_strip->show();
+  this->frame++;
 }
