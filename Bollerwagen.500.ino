@@ -8,6 +8,8 @@
 
 Adafruit_NeoPixel physical_strip(10, 5, NEO_GRB + NEO_KHZ800);
 ProgramExecutor executor(&physical_strip);
+
+//TODO: Voltmeter eichen
 Voltmeter voltmeter(A0, 2, 4.5, 390000, 81800 + 10030);
 
 // TODO: create virtual sub-strips
