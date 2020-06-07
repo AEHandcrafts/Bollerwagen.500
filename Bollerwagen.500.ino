@@ -10,7 +10,7 @@ Adafruit_NeoPixel physical_strip(10, 5, NEO_GRB + NEO_KHZ800);
 ProgramExecutor executor(&physical_strip);
 
 //TODO: Voltmeter eichen
-Voltmeter voltmeter(A0, 2, 4.5, 390000, 81800 + 10030);
+Voltmeter voltmeter(A0, 8, 4.98, 390000, 81800 + 10030);
 
 // TODO: create virtual sub-strips
 VirtualStrip str1(&physical_strip, 0, 5);
@@ -33,6 +33,9 @@ void setup() {
   voltmeter.begin();
   Serial.println("Initialized Voltmeter.");
 
+  //Relais
+  pinMode(10, OUTPUT);
+  
   // Register Programs
   executor.registerProgram(new NoProgram());
   Serial.println("Registered Programs.");
@@ -45,10 +48,14 @@ void loop() {
   if(voltage > 11.0){
     for(int i = 0; i < 600; i++){
       executor.render();
-    } 
+    }
+
+    digitalWrite(10, HIGH);
   }else{
-    Serial.println("UnderVoltage detected. Rechecking in 3 Seconds...");
-    delay(3000);
+    Serial.println("UnderVoltage detected. Rechecking in 10 Seconds...");
+    digitalWrite(10, LOW);
+    
+    delay(10000);
   }
 }
 

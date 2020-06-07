@@ -29,5 +29,5 @@ double Voltmeter::measureVoltage_single(){
   double current = measuredVoltage / (double)this->r2;
   double voltage = ((double)this->r1 + (double)this->r2) * current;
 
-  return voltage - 0.15;
+  return voltage - 0.03;
 }
