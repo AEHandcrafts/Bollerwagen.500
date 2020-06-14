@@ -16,6 +16,9 @@ Voltmeter voltmeter(A0, 8, 4.98, 390000, 81800 + 10030);
 VirtualStrip str1(&physical_strip, 0, 5);
 VirtualStrip str2(&physical_strip, 6, 10);
 
+double shutdownVoltage = 10.5;
+int shutdownTime = 80; // shutdownTime times 3 secondons under voltage
+
 void setup() {
   Serial.begin(9600);
   
@@ -41,18 +44,26 @@ void setup() {
   Serial.println("Registered Programs.");
 }
 
+int underVoltageCounter = 0;
 void loop() {
   double voltage = voltmeter.measureVoltage();
   Serial.println("Measured Voltage: " + String(voltage) + "V");
-  
-  if(voltage > 11.0){
-    for(int i = 0; i < 600; i++){
-      executor.render();
-    }
 
-    digitalWrite(10, HIGH);
+  if (voltage > shutdownVoltage){
+    underVoltageCounter = 0;
   }else{
-    Serial.println("UnderVoltage detected. Rechecking in 10 Seconds...");
+    underVoltageCounter++;    
+    Serial.println("UnderVoltage detected: " + String(underVoltageCounter));
+  }
+  
+  if(underVoltageCounter < shutdownTime){
+    digitalWrite(10, HIGH);
+    
+    /*for(int i = 0; i < 600; i++){
+      executor.render();
+    }*/
+    delay(3000);
+  }else{
     digitalWrite(10, LOW);
     
     delay(10000);
