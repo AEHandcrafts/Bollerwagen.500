@@ -1,6 +1,6 @@
 #include "ledcontroller.h"
 
-LEDController::LEDController(Adafruit_NeoPixel* physical_strip): physical_strip(physical_strip), registeredPrograms(0), selected(0), frame(0){
+LEDController::LEDController(LEDCollection* led_collection): led_collection(led_collection), registeredPrograms(0), selected(0), frame(0){
 }
 
 void LEDController::registerProgram(Program* program){
@@ -9,8 +9,8 @@ void LEDController::registerProgram(Program* program){
 }
 
 void LEDController::nextProgram(){
-  this->physical_strip->clear();
-  this->physical_strip->show();
+  this->led_collection->clear();
+  this->led_collection->show();
   Serial.println("Cleared the LED Strip.");
   
   this->selected = (this->selected + 1) % this->registeredPrograms;
@@ -21,6 +21,6 @@ void LEDController::nextProgram(){
 
 void LEDController::render(){
   this->programs[this->selected]->render(this->frame);
-  this->physical_strip->show();
+  this->led_collection->show();
   this->frame++;
 }

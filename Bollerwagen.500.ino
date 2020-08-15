@@ -2,24 +2,17 @@
 #include "voltmeter.h"
 #include "pwrmgr.h"
 
-#include <Adafruit_NeoPixel.h>
 #include "ledcontroller.h"
-#include "virtualstrip.h"
+#include "ledcollection.h"
 #include "program.h"
+#include "noprogram.h"
+#include "staticcolorprogram.h"
 
-#include "programs/noprogram.h"
-
-
-
-Adafruit_NeoPixel physical_strip(10, 5, NEO_GRB + NEO_KHZ800);
-LEDController led_controller(&physical_strip);
+LEDCollection led_collection;
+LEDController led_controller(&led_collection);
 
 Voltmeter voltmeter(A0, 8, 4.98, 390000, 81800 + 10030);
 PowerManager power_manager(10, &voltmeter, 10.5, 18);
-
-// TODO: create virtual sub-strips
-VirtualStrip str1(&physical_strip, 0, 5);
-VirtualStrip str2(&physical_strip, 6, 10);
 
 void setup() {
   Serial.begin(9600);
@@ -38,13 +31,15 @@ void setup() {
   Serial.println("Attatched Power Manager Timer Interrupt.");
 
   // Physical Strip init
-  physical_strip.begin();
-  physical_strip.clear();
-  physical_strip.show();
+  led_collection.begin();
+  led_collection.clear();
+  led_collection.show();
   Serial.println("Initialized Physical LED Strip.");
   
   // Register Programs
   led_controller.registerProgram(new NoProgram());
+  led_controller.registerProgram(new StaticColorProgram(&led_collection, 255, 255, 255));
+  led_controller.registerProgram(new StaticColorProgram(&led_collection, 0, 0, 255));
   Serial.println("Registered Programs.");
 
   // Setup Button for Program switch
