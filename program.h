@@ -13,6 +13,7 @@ public:
   Program(VirtualStrip* strip){}
   virtual ~Program(){}
 
+  virtual void begin() = 0;
   virtual void render(unsigned long frame) = 0;
   
 };

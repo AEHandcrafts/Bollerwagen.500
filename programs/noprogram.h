@@ -10,9 +10,8 @@ public:
 	NoProgram(){}
 	virtual ~NoProgram(){}
 
-	virtual void render(unsigned long frame) {
-		//delay(1000);
-	}
+	virtual void begin() override {}
+	virtual void render(unsigned long frame) override {}
 	
 };
 

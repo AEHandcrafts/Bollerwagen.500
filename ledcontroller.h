@@ -1,10 +1,10 @@
-#ifndef PROGRAMEXECUTOR_H
-#define PROGRAMEXECUTOR_H
+#ifndef LEDCONTROLLER_H
+#define LEDCONTROLLER_H
 
 #include "program.h"
 #include "./util/array.h"
 
-class ProgramExecutor {
+class LEDController {
 
 private:
   Adafruit_NeoPixel* physical_strip;
@@ -15,7 +15,7 @@ private:
   unsigned long frame;
   
 public:
-  ProgramExecutor(Adafruit_NeoPixel* physical_strip);
+  LEDController(Adafruit_NeoPixel* physical_strip);
 
   void registerProgram(Program* program);
   void nextProgram();
