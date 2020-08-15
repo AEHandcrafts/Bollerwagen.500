@@ -1,20 +1,21 @@
-#ifndef PROGRAMEXECUTOR_H
-#define PROGRAMEXECUTOR_H
+#ifndef LEDCONTROLLER_H
+#define LEDCONTROLLER_H
 
 #include "program.h"
-#include <ArduinoSTL.h>
+#include "./util/array.h"
 
-class ProgramExecutor {
+class LEDController {
 
 private:
   Adafruit_NeoPixel* physical_strip;
-  std::vector<Program*> programs;
-  
+  Array<Program*, 10> programs;
+
+  int registeredPrograms;
   int selected;
   unsigned long frame;
   
 public:
-  ProgramExecutor(Adafruit_NeoPixel* physical_strip);
+  LEDController(Adafruit_NeoPixel* physical_strip);
 
   void registerProgram(Program* program);
   void nextProgram();
