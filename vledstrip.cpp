@@ -24,9 +24,9 @@ void VLEDStrip::setPixelColor(int x, int r, int g, int b){
 void VLEDStrip::fill(int r, int g, int b){
   uint32_t color = this->physical_strip->Color(r, g, b);
   if((this->end - this->start) >= 0){
-    this->physical_strip->fill(color, this->start, this->end);
+    this->physical_strip->fill(color, this->start, this->numPixels());
   }else{
-    this->physical_strip->fill(color, this->end, this->start);
+    this->physical_strip->fill(color, this->end, this->numPixels());
   }
 }
 
@@ -35,5 +35,5 @@ void VLEDStrip::clear(){
 }
 
 int VLEDStrip::numPixels(){
-  return abs(this->end - this->start);
+  return abs(this->end - this->start) + 1;
 }
