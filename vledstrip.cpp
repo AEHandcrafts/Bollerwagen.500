@@ -14,7 +14,7 @@ void VLEDStrip::setPixelColor(int x, int r, int g, int b){
       this->physical_strip->setPixelColor(x, r, g, b);
     }
   }else{
-    x += this->end;
+    x = this->start - x;
     if(x >= this->end && x <= this->start){
       this->physical_strip->setPixelColor(x, r, g, b);
     }
