@@ -19,6 +19,7 @@ public:
   LEDController(LEDCollection* led_collection);
 
   void registerProgram(Program* program);
+  void begin();
   void nextProgram();
   void render();
 };
