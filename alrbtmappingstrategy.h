@@ -10,7 +10,7 @@ public:
       if(y % 2 == 0){
         return y * width + x;
       }else {
-        return y * width - x;
+        return y * width + width - 1 - x;
       }
   }
 };
