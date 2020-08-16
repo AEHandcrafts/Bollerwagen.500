@@ -40,6 +40,7 @@ void setup() {
   led_controller.registerProgram(new NoProgram());
   led_controller.registerProgram(new StaticColorProgram(&led_collection, 255, 255, 255));
   led_controller.registerProgram(new StaticColorProgram(&led_collection, 0, 0, 255));
+  led_controller.begin();
   Serial.println("Registered Programs.");
 
   // Setup Button for Program switch
