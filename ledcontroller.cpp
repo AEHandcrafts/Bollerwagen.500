@@ -8,6 +8,10 @@ void LEDController::registerProgram(Program* program){
   this->registeredPrograms++;
 }
 
+void LEDController::begin(){
+  this->programs[this->selected]->begin();
+}
+
 void LEDController::nextProgram(){
   this->led_collection->clear();
   this->led_collection->show();
