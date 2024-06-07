@@ -1,13 +1,14 @@
 #ifndef LEDCONTROLLER_H
 #define LEDCONTROLLER_H
 
+#include "ledcollection.h"
 #include "program.h"
-#include "./util/array.h"
+#include "array.h"
 
 class LEDController {
 
 private:
-  Adafruit_NeoPixel* physical_strip;
+  LEDCollection* led_collection;
   Array<Program*, 10> programs;
 
   int registeredPrograms;
@@ -15,9 +16,10 @@ private:
   unsigned long frame;
   
 public:
-  LEDController(Adafruit_NeoPixel* physical_strip);
+  LEDController(LEDCollection* led_collection);
 
   void registerProgram(Program* program);
+  void begin();
   void nextProgram();
   void render();
 };
